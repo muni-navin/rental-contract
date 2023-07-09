@@ -1,0 +1,109 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.org.pmc.rental.contract</groupId>
+    <artifactId>rental-contract</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+    <name>rental-contract</name>
+    <description>Rental Contract</description>
+
+    <parent>
+        <groupId>com.org.pmc.contract</groupId>
+        <artifactId>pmc-contract-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.1.0</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <files>
+                                <file>${project.basedir}/src/main/resources/rental-contract.properties</file>
+                            </files>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.github.kongchen</groupId>
+                <artifactId>swagger-maven-plugin</artifactId>
+                <version>3.1.8</version>
+                <configuration>
+                    <apiSources>
+                        <apiSource>
+                            <springmvc>true</springmvc>
+                            <locations>
+                                <location>com.pmc.rental.contract.endpoint.RentalSolutionApi</location>
+                            </locations>
+                            <schemes>
+                                <scheme>http</scheme>
+                                <scheme>https</scheme>
+                            </schemes>
+                            <host>localhost:8080</host>
+                            <basePath>/</basePath>
+                            <info>
+                                <!--suppress UnresolvedMavenProperty -->
+                                <title>${pmc.contract.api-title}</title>
+                                <!--suppress UnresolvedMavenProperty -->
+                                <description>${pmc.contract.api-description}</description>
+                                <version>${project.name}</version>
+                                <contact>
+                                    <!--suppress UnresolvedMavenProperty -->
+                                    <email>${pmc.contract.team-email}</email>
+                                    <!--suppress UnresolvedMavenProperty -->
+                                    <name>${pmc.contract.team-name}</name>
+                                    <!--suppress UnresolvedMavenProperty -->
+                                    <url>${pmc.contract.team-url}</url>
+                                </contact>
+                                <license>
+                                    <url>http://www.apache.org/licenses/LICENSE-2.0.html</url>
+                                    <name>Apache 2.0</name>
+                                </license>
+                            </info>
+                            <securityDefinitions>
+                                <securityDefinition>
+                                    <json>/security-definition.json</json>
+                                </securityDefinition>
+                            </securityDefinitions>
+                            <outputFormats>json</outputFormats>
+                            <swaggerFileName>rental-api</swaggerFileName>
+                            <swaggerDirectory>${project.build.outputDirectory}/swagger/rental-api</swaggerDirectory>
+                        </apiSource>
+                    </apiSources>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>javax.xml.bind</groupId>
+                        <artifactId>jaxb-api</artifactId>
+                        <version>2.3.1</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+</project>
