@@ -16,7 +16,7 @@ public class Property {
     Long id;
 
     @Schema(description = "Name of the property")
-    String title;
+    String propertyName;
 
     @Schema(description = "Description of the property")
     String description;
@@ -37,5 +37,5 @@ public class Property {
     Integer numberOfRooms;
 
     @Schema(description = "Price of the property")
-    String rentalPrice;
+    Integer rentalPrice;
 }

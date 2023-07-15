@@ -6,7 +6,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
+import java.util.Set;
 
 @Data
 @Builder
@@ -38,7 +38,6 @@ public class User {
     String state;
     @Schema(description = "Property owner or Tenant zip code")
     String zipCode;
-
     @Schema(description = "Properties owned by user")
-    private List<Property> properties;
+    Set<Property> properties;
 }
