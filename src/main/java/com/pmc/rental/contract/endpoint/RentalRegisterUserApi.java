@@ -35,10 +35,10 @@ public interface RentalRegisterUserApi {
     @Operation(summary = "Fetching the user")
     @GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
     @ApiResponses({@ApiResponse(responseCode = "200", description ="Success")})
-    ResponseEntity<User> fetch(@Parameter(name = "id") @RequestParam(value="id") String id);
+    ResponseEntity<User> fetch(@Parameter(name = "userId") @RequestParam(value="userId") Long userId);
 
     @Operation(summary = "Deleting the user")
     @DeleteMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
     @ApiResponses({@ApiResponse(responseCode = "200", description ="Success")})
-    ResponseEntity<User> delete(@RequestBody User user);
+    ResponseEntity<String> delete(@Parameter(name = "userId") @RequestParam(value="userId") Long userId);
 }
