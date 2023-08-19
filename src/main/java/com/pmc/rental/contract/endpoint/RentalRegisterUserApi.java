@@ -1,5 +1,6 @@
 package com.pmc.rental.contract.endpoint;
 
+import com.pmc.rental.contract.model.LoginRequest;
 import com.pmc.rental.contract.model.User;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -41,4 +42,10 @@ public interface RentalRegisterUserApi {
     @DeleteMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
     @ApiResponses({@ApiResponse(responseCode = "200", description ="Success")})
     ResponseEntity<String> delete(@Parameter(name = "userId") @RequestParam(value="userId") Long userId);
+
+    @Operation(summary = "Validating username and password")
+    @PostMapping(path = "/login", produces = {MediaType.APPLICATION_JSON_VALUE})
+    @ApiResponses({@ApiResponse(responseCode = "200", description ="Success")})
+    ResponseEntity<Boolean> validate(@RequestBody LoginRequest loginRequest);
 }
+
